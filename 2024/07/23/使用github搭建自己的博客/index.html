@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="張小升">
+
+
+
+
+
+<title>使用github搭建自己的博客 | 張小升</title>
+
+
+
+    <link rel="icon" href="/favicon1.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">mrzxs&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">mrzxs&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">使用github搭建自己的博客</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">張小升</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">July 23, 2024&nbsp;&nbsp;10:43:57</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E5%85%B3%E4%BA%8E%E5%8D%9A%E5%AE%A2/">关于博客</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <ul>
+<li><p>前情提要：不想用csdn，让人非常不舒服。一直用的博客园，我怕他有一天倒闭了，现在用github做，github应该不会倒闭，哈哈</p>
+</li>
+<li><p>本内容参考链接： <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Eg41157tL">https://www.bilibili.com/video/BV1Eg41157tL</a></p>
+</li>
+</ul>
+<h1 id="使用github搭建自己的博客"><a href="#使用github搭建自己的博客" class="headerlink" title="使用github搭建自己的博客"></a>使用github搭建自己的博客</h1><ul>
+<li><p>此次采用hexo框架搭建，如需使用next框架请令行搜索。</p>
+</li>
+<li><p>本人博客地址：<a href="">mrzls999.github.io</a></p>
+</li>
+</ul>
+<h2 id="一、注册、登录github"><a href="#一、注册、登录github" class="headerlink" title="一、注册、登录github"></a>一、注册、登录github</h2><p>略。。。</p>
+<h2 id="二、安装nodejs-npm-、git"><a href="#二、安装nodejs-npm-、git" class="headerlink" title="二、安装nodejs(npm)、git"></a>二、安装nodejs(npm)、git</h2><h3 id="1、安装nodejs-npm"><a href="#1、安装nodejs-npm" class="headerlink" title="1、安装nodejs(npm)"></a>1、安装nodejs(npm)</h3><ul>
+<li><p>简介：nodejs是一个免费、开源、跨平台的 JavaScript 运行时环境,它让开发人员能够创建服务器、Web 应用、命令行工具和脚本</p>
+</li>
+<li><p><strong>使用nvm管理nodejs</strong>: nvm 全名 node.js version management，是一个 nodejs 的版本管理工具。通过它可以安装和切换不同版本的 nodejs，主要解决 node 各种版本存在不兼容现象，我比较喜欢这种，可以随意切换版本，挺方便</p>
+</li>
+<li><p>nvm官网链接：<a target="_blank" rel="noopener" href="https://github.com/coreybutler/nvm-windows/releases">https://github.com/coreybutler/nvm-windows/releases</a></p>
+</li>
+<li><p>如果是安装版不需要配置path路径，如果是zip版需要配置，linux环境类似</p>
+</li>
+<li><p><strong>镜像加速</strong>：找到nvm安装路径下的setting.txt加入以下两段，<strong>如果不对，自己再在网上搜搜</strong></p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node_mirror:https:<span class="comment">//npmmirror.com/mirrors/node/</span></span><br><span class="line">npm_mirror:https:<span class="comment">//npmmirror.com/mirrors/npm/</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>nvm命令</strong>：</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">nvm --<span class="built_in">help</span>					// 帮助</span><br><span class="line">nvm off                     // 禁用node.js版本管理(不卸载任何东西)</span><br><span class="line">nvm on                      // 启用node.js版本管理</span><br><span class="line">nvm install &lt;version&gt;       // 安装node.js的命名 version是版本号 例如：nvm install 8.12.0</span><br><span class="line">nvm uninstall &lt;version&gt;     // 卸载node.js是的命令，卸载指定版本的nodejs，当安装失败时卸载使用</span><br><span class="line">nvm <span class="built_in">ls</span>                      // 显示所有安装的node.js版本</span><br><span class="line">nvm list available          // 显示可以安装的所有node.js的版本</span><br><span class="line">nvm use &lt;version&gt;           // 切换到使用指定的nodejs版本</span><br><span class="line">nvm v                       // 显示nvm版本</span><br><span class="line">nvm install stable          // 安装最新稳定版</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>nodejs官网链接：<a target="_blank" rel="noopener" href="https://nodejs.org/zh-cn%EF%BC%8C%E9%87%8C%E8%BE%B9%E6%9C%89nodejs%E5%92%8Cnpm%E4%BA%92%E7%9B%B8%E5%AF%B9%E5%BA%94%E7%9A%84%E7%89%88%E6%9C%AC%EF%BC%8Cnodejs%E9%87%8C%E5%8C%85%E5%90%AB%E4%BA%86npm">https://nodejs.org/zh-cn，里边有nodejs和npm互相对应的版本，nodejs里包含了npm</a></p>
+</li>
+<li><p>如果是安装版不需要配置path路径，如果是zip版需要配置，linux环境类似</p>
+</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node -v			--本人使用版本	20.15.1</span><br><span class="line">npm -v			--本人使用版本	10.7.0</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>注意</strong>：当切换nodejs版本时，npm的版本也要切换，其余问题自行解决</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm -v 						// 查看npm当前版本</span><br><span class="line">npm install -g npm 			// 如果不是最新版本，运行指令升级到最新版本</span><br><span class="line">npm -g install npm@10.7.0	// 如果想更新到指定版本，运行指令</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、安装配置git"><a href="#2、安装配置git" class="headerlink" title="2、安装配置git"></a>2、安装配置git</h3><ul>
+<li><p>如果是安装版不需要配置path路径，如果是zip版需要配置，linux环境类似，将Git Bash和Git GUI添加到右键里。其余略。。。</p>
+</li>
+<li><p>配置git：</p>
+</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;github的用户名&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;注册github时的邮箱&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="三、安装hexo"><a href="#三、安装hexo" class="headerlink" title="三、安装hexo"></a>三、安装hexo</h2><ul>
+<li>以上环境都准备好后，开始安装hexo</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>安装完成hexo后，在指定文件夹加通过git bash执行如下命令</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo init myBlog</span><br><span class="line"><span class="built_in">cd</span> myBlog</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>若以上命令都没有报错，运行hexo s，运行起来，根据提示去<a href="">localhost:4000</a>查看效果。如有问题，可能是版本等问题，自行解决</p>
+</li>
+<li><p>hexo的命令简写如下</p>
+</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo s		--启动本地服务server	</span><br><span class="line">hexo g		--生成generate	</span><br><span class="line">hexo d		--部署deploy	</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>加载主题</p>
+<ul>
+<li>官网主题：<a target="_blank" rel="noopener" href="https://hexo.io/themes/">https://hexo.io/themes/</a></li>
+<li>自己采用的主题：<a target="_blank" rel="noopener" href="https://github.com/Siricee/hexo-theme-Chic">https://github.com/Siricee/hexo-theme-Chic</a></li>
+<li>下载好后放到myBlog&#x2F;themes下</li>
+<li>在_config.yml文件中修改theme为hexo-theme-Chic（和主题文件名一致）</li>
+<li>再次hexo s，查看主题效果</li>
+</ul>
+</li>
+<li><p>配置hexo-theme-Chic主题中的_config.yml</p>
+<ul>
+<li>标题、图片、描述、各种地址等</li>
+</ul>
+</li>
+</ul>
+<h2 id="四、仓库等配置"><a href="#四、仓库等配置" class="headerlink" title="四、仓库等配置"></a>四、仓库等配置</h2><ul>
+<li><p>github上创建一个仓库名：用户名.github.io</p>
+</li>
+<li><p>配置ssh key，因为github现在不用https传输了，所以使用ssh</p>
+</li>
+<li><pre><code class="sh">git config --global user.name &quot;用户名&quot;
+git config --global user.email &quot;邮箱地址&quot;
+ssh-keygen -t rsa -C &#39;邮箱地址&#39;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 三次回车，便可生成ssh key，ssh key不要分享噢</span><br><span class="line"></span><br><span class="line">- 查看ssh key `cat ~/.ssh/id_rsa.pub`</span><br><span class="line"></span><br><span class="line">- 首次使用还须确认并添加主机到本机SSH可信列表。若返回Hi xxx! You&#x27;ve successfuly authenticated,but Github does not provide shell access.内容，则证实添加成功。</span><br><span class="line"></span><br><span class="line">  ```sh</span><br><span class="line">  ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>将查看到的ssh key添加到github上，头像-&gt;settings-&gt;SSH and GPG keys</p>
+</li>
+<li><p>此时需要将本地和github连起来，可以查看官方教程</p>
+<ul>
+<li>此处配置项目根目录_config.yml末尾。<strong>注意</strong>：此处使用的是ssh，以后就可以不用输入密钥了</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">git@github.com:Mrzls999/Mrzls999.github.io.git</span></span><br><span class="line">  <span class="comment">#repository: https://github.com/Mrzls999/Mrzls999.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">main</span>		<span class="comment">#此处看看你的github是用的main还是master吧</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>配置github的Token：settings-&gt;Developer Settings-&gt;Personal access tokens-&gt;Tokens(classic)生成token</p>
+</li>
+<li><p>安装部署插件hexo-deployer-git <code>npm install hexo-deployer-git --save</code></p>
+</li>
+<li><pre><code class="sh">hexo g	--生成
+hexo d	--上传
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 五、写文章并上传</span><br><span class="line"></span><br><span class="line">`hexo new &#x27;文章标题&#x27;`在source/_posts下就生成了md文件，使用markdown格式编写，此处我使用的typora直接编写，非常方便</span><br><span class="line"></span><br><span class="line">```yaml</span><br><span class="line">--</span><br><span class="line">title: 使用github搭建自己的博客</span><br><span class="line">date: 2024-07-23 10:43:57</span><br><span class="line">tags: [关于博客,tag1,tag2,...]</span><br><span class="line">categories: [关于博客,c1,c2,...]</span><br><span class="line">--</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+<h2 id="六、更换电脑后，如何迁移-hexo-博客？"><a href="#六、更换电脑后，如何迁移-hexo-博客？" class="headerlink" title="六、更换电脑后，如何迁移 hexo 博客？"></a>六、更换电脑后，如何迁移 hexo 博客？</h2><ul>
+<li><p>需要的步骤：迁移 hexo 文件夹、git 客户端的下载与安装 、本地Git与Github公钥连接、npm的下载与安装、hexo的下载与安装。</p>
+</li>
+<li><p>迁移本地 hexo项目 文件夹</p>
+<ul>
+<li>需要拷贝原电脑项目文件中的_config.yml，themes，source，scaffolds，package.json，.gitignore 等文件到新电脑新建的文件夹中或者建议直接将原文件夹整个打包拷贝到新电脑上。（<strong>注意</strong>：也可以从github上copy）</li>
+</ul>
+</li>
+<li><p>安装 Git 客户端</p>
+</li>
+<li><p>本地Git与Github公钥连接</p>
+<ul>
+<li><p>生成密钥</p>
+</li>
+<li><pre><code class="sh">git config --global user.name &quot;github用户名&quot;
+git config --global user.email &quot;github邮箱&quot;
+ssh-keygen -t rsa -C &quot;github邮箱&quot;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- `cat ~/.ssh/id_rsa.pub`--&gt;添加到github的SSH and GPG keys</span><br><span class="line"></span><br><span class="line">- 安装 npm（上边有）</span><br><span class="line"></span><br><span class="line">- 安装hexo</span><br><span class="line"></span><br><span class="line">  - ```sh</span><br><span class="line">    npm install hexo-cli -g</span><br><span class="line">    npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>测试一下吧</p>
+</li>
+</ul>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>張小升</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://example.com/2024/07/23/%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/">http://example.com/2024/07/23/%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%85%B3%E4%BA%8E%E5%8D%9A%E5%AE%A2/"># 关于博客</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2024/07/18/hello-world/">Hello World</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© 張小升 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
