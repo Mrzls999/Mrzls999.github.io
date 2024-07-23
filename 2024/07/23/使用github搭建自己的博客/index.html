@@ -313,18 +313,25 @@
 </li>
 <li><p>配置ssh key，因为github现在不用https传输了，所以使用ssh</p>
 </li>
-<li><pre><code class="sh">git config --global user.name &quot;用户名&quot;
-git config --global user.email &quot;邮箱地址&quot;
-ssh-keygen -t rsa -C &#39;邮箱地址&#39;
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 三次回车，便可生成ssh key，ssh key不要分享噢</span><br><span class="line"></span><br><span class="line">- 查看ssh key `cat ~/.ssh/id_rsa.pub`</span><br><span class="line"></span><br><span class="line">- 首次使用还须确认并添加主机到本机SSH可信列表。若返回Hi xxx! You&#x27;ve successfuly authenticated,but Github does not provide shell access.内容，则证实添加成功。</span><br><span class="line"></span><br><span class="line">  ```sh</span><br><span class="line">  ssh -T git@github.com</span><br></pre></td></tr></table></figure>
-</code></pre>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;用户名&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;邮箱地址&quot;</span></span><br><span class="line">ssh-keygen -t rsa -C <span class="string">&#x27;邮箱地址&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>三次回车，便可生成ssh key，ssh key不要分享噢</p>
 </li>
+<li><p>查看ssh key <code>cat ~/.ssh/id_rsa.pub</code></p>
+</li>
+<li><p>首次使用还须确认并添加主机到本机SSH可信列表。若返回Hi xxx! You’ve successfuly authenticated,but Github does not provide shell access.内容，则证实添加成功。</p>
+</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+
+<ul>
 <li><p>将查看到的ssh key添加到github上，头像-&gt;settings-&gt;SSH and GPG keys</p>
 </li>
 <li><p>此时需要将本地和github连起来，可以查看官方教程</p>
-<ul>
-<li>此处配置项目根目录_config.yml末尾。<strong>注意</strong>：此处使用的是ssh，以后就可以不用输入密钥了</li>
-</ul>
+</li>
+<li><p>此处配置项目根目录_config.yml末尾。<strong>注意</strong>：此处使用的是ssh，以后就可以不用输入密钥了</p>
 </li>
 </ul>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">git@github.com:Mrzls999/Mrzls999.github.io.git</span></span><br><span class="line">  <span class="comment">#repository: https://github.com/Mrzls999/Mrzls999.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">main</span>		<span class="comment">#此处看看你的github是用的main还是master吧</span></span><br></pre></td></tr></table></figure>
@@ -334,12 +341,14 @@ ssh-keygen -t rsa -C &#39;邮箱地址&#39;
 </li>
 <li><p>安装部署插件hexo-deployer-git <code>npm install hexo-deployer-git --save</code></p>
 </li>
-<li><pre><code class="sh">hexo g	--生成
-hexo d	--上传
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 五、写文章并上传</span><br><span class="line"></span><br><span class="line">- `hexo new &#x27;文章标题&#x27;`在source/_posts下就生成了md文件，使用markdown格式编写，此处我使用的typora直接编写，非常方便</span><br><span class="line"></span><br><span class="line">```yaml</span><br><span class="line">--</span><br><span class="line">title: 使用github搭建自己的博客</span><br><span class="line">date: 2024-07-23 10:43:57</span><br><span class="line">tags: [关于博客,tag1,tag2,...]</span><br><span class="line">categories: [关于博客,c1,c2,...]</span><br><span class="line">--</span><br></pre></td></tr></table></figure>
-</code></pre>
-</li>
 </ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g	--生成</span><br><span class="line">hexo d	--上传</span><br></pre></td></tr></table></figure>
+
+<h2 id="五、写文章并上传"><a href="#五、写文章并上传" class="headerlink" title="五、写文章并上传"></a>五、写文章并上传</h2><ul>
+<li><code>hexo new &#39;文章标题&#39;</code>在source&#x2F;_posts下就生成了md文件，使用markdown格式编写，此处我使用的typora直接编写，非常方便</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">--</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">使用github搭建自己的博客</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2024-07-23 10:43:57</span></span><br><span class="line"><span class="attr">tags:</span> [<span class="string">关于博客</span>,<span class="string">tag1</span>,<span class="string">tag2</span>,<span class="string">...</span>]</span><br><span class="line"><span class="attr">categories:</span> [<span class="string">关于博客</span>,<span class="string">c1</span>,<span class="string">c2</span>,<span class="string">...</span>]</span><br><span class="line"><span class="string">--</span></span><br></pre></td></tr></table></figure>
+
 <h2 id="六、更换电脑后，如何迁移-hexo-博客？"><a href="#六、更换电脑后，如何迁移-hexo-博客？" class="headerlink" title="六、更换电脑后，如何迁移 hexo 博客？"></a>六、更换电脑后，如何迁移 hexo 博客？</h2><ul>
 <li><p>需要的步骤：迁移 hexo 文件夹、git 客户端的下载与安装 、本地Git与Github公钥连接、npm的下载与安装、hexo的下载与安装。</p>
 </li>
@@ -352,15 +361,19 @@ hexo d	--上传
 </li>
 <li><p>本地Git与Github公钥连接</p>
 <ul>
-<li><p>生成密钥</p>
+<li>生成密钥</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;github用户名&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;github邮箱&quot;</span></span><br><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;github邮箱&quot;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><code>cat ~/.ssh/id_rsa.pub</code>–&gt;添加到github的SSH and GPG keys</p>
 </li>
-<li><pre><code class="sh">git config --global user.name &quot;github用户名&quot;
-git config --global user.email &quot;github邮箱&quot;
-ssh-keygen -t rsa -C &quot;github邮箱&quot;
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- `cat ~/.ssh/id_rsa.pub`--&gt;添加到github的SSH and GPG keys</span><br><span class="line"></span><br><span class="line">- 安装 npm（上边有）</span><br><span class="line"></span><br><span class="line">- 安装hexo</span><br><span class="line"></span><br><span class="line">  - ```sh</span><br><span class="line">    npm install hexo-cli -g</span><br><span class="line">    npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-</code></pre>
+<li><p>安装 npm（上边有）</p>
+</li>
+<li><p>安装hexo</p>
 </li>
 </ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>测试一下吧</p>
 </li>
