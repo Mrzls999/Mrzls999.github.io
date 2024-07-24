@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="張小升">
+
+
+
+
+
+<title>Dokcer | 張小升</title>
+
+
+
+    <link rel="icon" href="/favicon1.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">mrzxs&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">mrzxs&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Dokcer</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">張小升</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">July 24, 2024&nbsp;&nbsp;16:12:09</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Docker/">Docker</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="第二章-Docker安装与启动"><a href="#第二章-Docker安装与启动" class="headerlink" title="第二章 Docker安装与启动"></a>第二章 Docker安装与启动</h1><h3 id="2-1-安装Docker-CentOS7"><a href="#2-1-安装Docker-CentOS7" class="headerlink" title="2.1 安装Docker-CentOS7"></a>2.1 安装Docker-CentOS7</h3><ul>
+<li><p>Docker官方建议在Ubuntu中安装，因为Docker是基于Ubuntu发布的，而且一般Docker出现的问题Ubuntu是最先更新或者打补丁的。在很多版本的CentOS中是不支持更新最新的一些补丁包的。 由于我们学习的环境都使用的是CentOS，因此这里我们将Docker安装到CentOS上。</p>
+<p><strong>注意</strong>：这里建议安装在CentOS7.x以上的版本，在CentOS6.x的版本中，安装前需要安装其他很多的环境，而且Docker很多补丁不支持更新。</p>
+</li>
+<li><p><strong>注意</strong>：如果在正式安装时出现yum一直尝试其它镜像，原因是CentOS7已经停止维护啦，切换一下源吧，阿里云里6,7,8都有</p>
+</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 先备份原yum配置文件</span></span><br><span class="line"><span class="built_in">mv</span> /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup</span><br><span class="line"><span class="comment"># 下载了阿里云提供的CentOS 7的Yum源配置文件，并将其覆盖到系统中的 /etc/yum.repos.d/CentOS-Base.repo 文件。</span></span><br><span class="line">wget -O /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo</span><br><span class="line"><span class="comment"># 或者执行：</span></span><br><span class="line">curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo</span><br><span class="line"><span class="comment"># 清除旧缓存</span></span><br><span class="line">yum clean all</span><br><span class="line"><span class="comment"># 生成新缓存</span></span><br><span class="line">yum makecache</span><br><span class="line"><span class="comment"># 检验新配置是否生效：</span></span><br><span class="line">yum repolist</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>正式安装</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装gcc和g++</span></span><br><span class="line">yum -y install gcc</span><br><span class="line">yum -y install gcc-c++</span><br><span class="line"><span class="comment"># 安装需要的软件包</span></span><br><span class="line">yum install -y yum-utils device-mapper-persistent-data lvm2</span><br><span class="line"><span class="comment"># 设置镜像仓库 推荐：阿里云服务器</span></span><br><span class="line">yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br><span class="line"><span class="comment"># 更新yum软件包索引</span></span><br><span class="line">yum makecache fast</span><br><span class="line"><span class="comment"># 安装指定版本的Docker</span></span><br><span class="line"><span class="comment"># 暂无</span></span><br><span class="line"><span class="comment"># 安装DOCKER CE（社区版）（DOCKER EE企业版收费）</span></span><br><span class="line">yum -y install docker-ce</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置镜像加速CentOS7版本</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /etc/docker</span><br><span class="line">vim  /etc/docker/daemon.json </span><br><span class="line"><span class="comment"># 阿里云(推荐) </span></span><br><span class="line">&#123;</span><br><span class="line"><span class="string">&quot;registry-mirrors&quot;</span>: [<span class="string">&quot;https://8y2y8njn.mirror.aliyuncs.com&quot;</span>]</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 网易云</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="string">&quot;registry-mirrors&quot;</span>: [<span class="string">&quot;http://hub-mirror.c.163.com&quot;</span>]</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># ustc</span></span><br><span class="line"><span class="comment"># 是老牌的linux镜像服务提供者了，还在遥远的ubuntu 5.04版本的时候就在用。ustc的docker镜像加速器速度很快。</span></span><br><span class="line"><span class="comment"># ustc docker mirror的优势之一就是不需要注册，是真正的公共服务。</span></span><br><span class="line"><span class="comment"># https://lug.ustc.edu.cn/wiki/mirrors/help/docker</span></span><br><span class="line">在该文件中输入如下内容：</span><br><span class="line">&#123;</span><br><span class="line"><span class="string">&quot;registry-mirrors&quot;</span>: [<span class="string">&quot;https://docker.mirrors.ustc.edu.cn&quot;</span>]</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 重新设置</span></span><br><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl restart docker</span><br><span class="line"></span><br><span class="line"><span class="comment">########################################################</span></span><br><span class="line"><span class="comment"># 卸载</span></span><br><span class="line">systemctl stop docker </span><br><span class="line">yum -y remove docker-ce</span><br><span class="line"><span class="built_in">rm</span> -rf /var/lib/docker</span><br><span class="line"><span class="comment"># 卸载旧版本</span></span><br><span class="line"><span class="comment"># 2019.11英文官网版本</span></span><br><span class="line"><span class="comment"># 最新的英文版：https://docs.docker.com/install/linux/docker-ce/centos/#uninstall-old-versions</span></span><br><span class="line">yum remove docker \</span><br><span class="line">docker-client \</span><br><span class="line">docker-client-latest \</span><br><span class="line">docker-common \</span><br><span class="line">docker-latest \</span><br><span class="line">docker-latest-logrotate \</span><br><span class="line">docker-logrotate \</span><br><span class="line">docker-engine</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>手动启动：<code>systemctl start docker</code> </p>
+</li>
+<li><p>自动启动：<code>systemctl enable docker</code>  </p>
+</li>
+<li><p>检查版本：<code>docker version</code></p>
+</li>
+<li><p>下载并运行HelloWorld：<code>docker run hello-world</code></p>
+</li>
+<li><p>如果下载不下来，可以配置镜像加速器</p>
+</li>
+<li><p>输出这段提示以后，hello world就会停止运行，容器自动终止。</p>
+</li>
+<li><p>run干了什么</p>
+<ul>
+<li>Docker在本机中寻找该镜像<ul>
+<li>本机中是否有该镜像<ul>
+<li>是：以该镜像为模板生产容器实例运行</li>
+<li>否：去Docker Hub上查找该镜像<ul>
+<li>hub能否找到<ul>
+<li>是：下载镜像到本地，并以该镜像为模板生产容器实例运行</li>
+<li>否：返回失败错误，查不到该镜像</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2-Docker的启动与停止"><a href="#2-2-Docker的启动与停止" class="headerlink" title="2.2 Docker的启动与停止"></a>2.2 Docker的启动与停止</h3><table>
+<thead>
+<tr>
+<th>简要描述</th>
+<th>具体命令</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>启动docker</td>
+<td>systemctl start docker</td>
+</tr>
+<tr>
+<td>停止docker：</td>
+<td>systemctl stop docker</td>
+</tr>
+<tr>
+<td>重启docker：</td>
+<td>systemctl restart docker</td>
+</tr>
+<tr>
+<td>查看docker状态：</td>
+<td>systemctl status docker</td>
+</tr>
+<tr>
+<td>开机启动：</td>
+<td>systemctl enable docker</td>
+</tr>
+<tr>
+<td>查看docker概要信息：</td>
+<td>docker info</td>
+</tr>
+<tr>
+<td>查看docker帮助文档：</td>
+<td>docker –help</td>
+</tr>
+<tr>
+<td>cp</td>
+<td>本地文件系统(OS操作系统|宿主机)和容器之间进行文件或者文件夹拷贝</td>
+</tr>
+<tr>
+<td>exec</td>
+<td>登录一个容器，使用命令行操作正在运行的容器。</td>
+</tr>
+<tr>
+<td>images</td>
+<td>镜像的集合查询。</td>
+</tr>
+<tr>
+<td>ps</td>
+<td>容器列表</td>
+</tr>
+<tr>
+<td>pull</td>
+<td>下载镜像</td>
+</tr>
+<tr>
+<td>restart</td>
+<td>重启一个或多个容器</td>
+</tr>
+<tr>
+<td>rm</td>
+<td>删除一个或多个容器</td>
+</tr>
+<tr>
+<td>rmi</td>
+<td>删除一个或多个镜像</td>
+</tr>
+<tr>
+<td>run</td>
+<td>创建一个容器，并运行起来</td>
+</tr>
+<tr>
+<td>save</td>
+<td>导出镜像到一个文件(tar)中</td>
+</tr>
+<tr>
+<td>search</td>
+<td>搜索镜像（从Docker Hub）</td>
+</tr>
+<tr>
+<td>start</td>
+<td>启动一个或多个已经停止的容器</td>
+</tr>
+<tr>
+<td>restart</td>
+<td>重启动一个或多个已经停止的容器</td>
+</tr>
+<tr>
+<td>stop</td>
+<td>停止一个或多个正在运行的容器</td>
+</tr>
+</tbody></table>
+<h1 id="第三章-常用命令"><a href="#第三章-常用命令" class="headerlink" title="第三章 常用命令"></a>第三章 常用命令</h1><ul>
+<li>镜像：Docker镜像是由文件系统叠加而成（是一种文件的存储形式）；是docker中的核心概念，可以认为镜像就是对某些运行环境或者软件打的包，用户可以从docker仓库中下载基础镜像到本地，比如，开发人员可以从docker仓库拉取（下载）一个只包含centos7系统的基础镜像，然后在这个镜像中安装jdk、mysql、Tomcat和<strong>自己开发的应用</strong>，最后将这些环境打成一个新的镜像。开发人员将这个新的镜像提交给测试人员进行测试，测试人员只需要在测试环境下运行这个镜像就可以了，这样就可以保证开发人员的环境和测试人员的环境完全一致。</li>
+</ul>
+<h2 id="3-1-镜像相关命令"><a href="#3-1-镜像相关命令" class="headerlink" title="3.1 镜像相关命令"></a>3.1 镜像相关命令</h2><h3 id="3-1-1-查看镜像"><a href="#3-1-1-查看镜像" class="headerlink" title="3.1.1 查看镜像"></a>3.1.1 查看镜像</h3><ul>
+<li><p>查看镜像可以使用如下命令：<code>docker images</code></p>
+<ul>
+<li>REPOSITORY：镜像名称</li>
+<li>TAG：镜像标签</li>
+<li>IMAGE ID：镜像ID</li>
+<li>CREATED：镜像的创建日期（不是获取该镜像的日期）</li>
+<li>SIZE：镜像大小</li>
+</ul>
+</li>
+<li><p>这些镜像都是存储在Docker的 &#x2F;var&#x2F;lib&#x2F;docker 目录下</p>
+</li>
+</ul>
+<h3 id="3-1-2-搜索镜像"><a href="#3-1-2-搜索镜像" class="headerlink" title="3.1.2 搜索镜像"></a>3.1.2 搜索镜像</h3><ul>
+<li><p>从网络中查找需要的镜像：docker search 镜像名称</p>
+<ul>
+<li><p>NAME：仓库名称</p>
+</li>
+<li><p>DESCRIPTION：镜像描述</p>
+</li>
+<li><p>STARS：用户评价，反应一个镜像的受欢迎程度</p>
+</li>
+<li><p>OFFICIAL：是否官方</p>
+</li>
+<li><p>AUTOMATED：自动构建，表示该镜像由Docker Hub自动构建流程创建</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-1-3-拉取镜像"><a href="#3-1-3-拉取镜像" class="headerlink" title="3.1.3 拉取镜像"></a>3.1.3 拉取镜像</h3><ul>
+<li><p>拉取镜像就是从Docker仓库下载镜像到本地，镜像名称格式为 【名称:版本号】，如果版本号不指定则是最新的版本 </p>
+</li>
+<li><p>命令：docker pull 镜像名称</p>
+</li>
+<li><p>刚刚下载的镜像通过 docker images 就可以查看</p>
+</li>
+</ul>
+<h3 id="3-1-4-删除镜像"><a href="#3-1-4-删除镜像" class="headerlink" title="3.1.4 删除镜像"></a>3.1.4 删除镜像</h3><ul>
+<li><p>可以按照镜像id删除镜像，命令如下：docker rmi 镜像ID</p>
+</li>
+<li><p>删除单个镜像(-f 强制删除)：docker rmi  -f 镜像ID</p>
+</li>
+<li><p>删除多个镜像：docker rmi -f 镜像名1:TAG 镜像名2:TAG</p>
+</li>
+<li><p>删除所有镜像：docker rmi -f $(docker images -qa)</p>
+</li>
+</ul>
+<h3 id="3-15-从Docker-Hub拉取"><a href="#3-15-从Docker-Hub拉取" class="headerlink" title="3.15 从Docker Hub拉取"></a>3.15 从Docker Hub拉取</h3><ul>
+<li><p>Docker镜像首页，包括官方镜像和其它公开镜像。Docker Hub上最受欢迎的10大镜像（通过Docker registry API获取不了镜像被pull的个数，只能通过镜像的stars数量来衡量镜像的流行度。毫无疑问，拥有最高stars数量的库都是官方库）。<a target="_blank" rel="noopener" href="https://hub.docker.com/search?image_filter=official&type=image">https://hub.docker.com/search?image_filter=official&amp;type=image</a></p>
+</li>
+<li><p>国情的原因，国内下载 Docker HUB 官方的相关镜像比较慢，可以使用国内（docker.io）的一些镜像加速器，镜像保持和官方一致，关键是速度块，推荐使用。</p>
+</li>
+</ul>
+<h2 id="3-2-容器相关命令"><a href="#3-2-容器相关命令" class="headerlink" title="3.2 容器相关命令"></a>3.2 容器相关命令</h2><ul>
+<li>容器也是docker中的核心概念，镜像是创建容器的软件 , 容器是由镜像运行产生的运行实例。镜像和容器的关系，就如同Java语言中类和对象的关系。</li>
+<li>如果需要通俗的描述容器的话，我觉得容器就是一个存放东西的地方，就像书包可以装各种文具、衣柜可以放各种衣服、鞋架可以放各种鞋子一样。我们现在所说的容器存放的东西可能更偏向于应用。比如网站、程序甚至是系统环境。</li>
+</ul>
+<h3 id="3-2-1-查看容器"><a href="#3-2-1-查看容器" class="headerlink" title="3.2.1 查看容器"></a>3.2.1 查看容器</h3><table>
+<thead>
+<tr>
+<th>简要描述</th>
+<th>具体命令</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>查看正在运行的容器：</td>
+<td>docker ps</td>
+</tr>
+<tr>
+<td>查看所有容器：</td>
+<td>docker ps –a</td>
+</tr>
+<tr>
+<td>查看最后一次运行的容器：</td>
+<td>docker ps –l</td>
+</tr>
+<tr>
+<td>查看停止的容器：</td>
+<td>docker ps -f status&#x3D;exited</td>
+</tr>
+</tbody></table>
+<h1 id="Docker安装Nacos-详细教程"><a href="#Docker安装Nacos-详细教程" class="headerlink" title="Docker安装Nacos(详细教程)"></a>Docker安装Nacos(详细教程)</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 简洁版</span></span><br><span class="line">docker pull nacos/nacos-server</span><br><span class="line">docker run -<span class="built_in">id</span> --name nacos -e MODE=standalone -p 8848:8848 -d nacos/nacos-server</span><br><span class="line">docker run -it --name nacos -e MODE=standalone -p 8848:8848 -d nacos/nacos-server /bash</span><br></pre></td></tr></table></figure>
+
+<p>1、拉取镜像</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull nacos/nacos-server</span><br></pre></td></tr></table></figure>
+
+<p>2、挂载目录，用于映射到容器，目录按自己的情况创建</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /mydata/nacos/logs/                      <span class="comment">#新建logs目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /mydata/nacos/init.d/         </span><br><span class="line">vim /mydata/nacos/init.d/custom.properties        <span class="comment">#修改配置文件</span></span><br></pre></td></tr></table></figure>
+
+<p>3、mysql新建nacos的数据库，并执行脚本 sql脚本地址如下：<strong>意思就是参考github上的官网去操作</strong></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/alibaba/nacos/blob/master/config/src/main/resources/META-INF/nacos-db.sql">https://github.com/alibaba/nacos/blob/master/config/src/main/resources/META-INF/nacos-db.sql</a></p>
+<p>4、修改配置文件custom.properties</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">server.contextPath=/nacos</span><br><span class="line">server.servlet.contextPath=/nacos</span><br><span class="line">server.port=<span class="number">8848</span></span><br><span class="line"> </span><br><span class="line">spring.datasource.platform=mysql</span><br><span class="line">db.num=<span class="number">1</span></span><br><span class="line">db.url<span class="number">.0</span>=jdbc:mysql:<span class="comment">//xx.xx.xx.x:3306/nacos_devtest_prod?characterEncoding=utf8&amp;connectTimeout=1000&amp;socketTimeout=3000&amp;autoReconnect=true</span></span><br><span class="line">db.user=user</span><br><span class="line">db.password=pass</span><br><span class="line"> </span><br><span class="line">nacos.cmdb.dumpTaskInterval=<span class="number">3600</span></span><br><span class="line">nacos.cmdb.eventTaskInterval=<span class="number">10</span></span><br><span class="line">nacos.cmdb.labelTaskInterval=<span class="number">300</span></span><br><span class="line">nacos.cmdb.loadDataAtStart=<span class="literal">false</span></span><br><span class="line">management.metrics.export.elastic.enabled=<span class="literal">false</span></span><br><span class="line">management.metrics.export.influx.enabled=<span class="literal">false</span></span><br><span class="line">server.tomcat.accesslog.enabled=<span class="literal">true</span></span><br><span class="line">server.tomcat.accesslog.pattern=%h %l %u %t <span class="string">&quot;%r&quot;</span> %s %b %D %&#123;User-Agent&#125;i</span><br><span class="line">nacos.security.ignore.urls=/,<span class="comment">/**/*.css,/**/</span>*.js,<span class="comment">/**/*.html,/**/</span>*.map,<span class="comment">/**/*.svg,/**/</span>*.png,<span class="comment">/**/*.ico,/console-fe/public/**,/v1/auth/login,/v1/console/health/**,/v1/cs/**,/v1/ns/**,/v1/cmdb/**,/actuator/**,/v1/console/server/**</span></span><br><span class="line"><span class="comment">nacos.naming.distro.taskDispatchThreadCount=1</span></span><br><span class="line"><span class="comment">nacos.naming.distro.taskDispatchPeriod=200</span></span><br><span class="line"><span class="comment">nacos.naming.distro.batchSyncKeyCount=1000</span></span><br><span class="line"><span class="comment">nacos.naming.distro.initDataRatio=0.9</span></span><br><span class="line"><span class="comment">nacos.naming.distro.syncRetryDelay=5000</span></span><br><span class="line"><span class="comment">nacos.naming.data.warmup=true</span></span><br><span class="line"><span class="comment">nacos.naming.expireInstance=true</span></span><br></pre></td></tr></table></figure>
+
+<p>5、启动容器</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">docker  run \</span><br><span class="line">--name nacos -d \</span><br><span class="line">-p 8848:8848 \</span><br><span class="line">--privileged=<span class="literal">true</span> \</span><br><span class="line">--restart=always \</span><br><span class="line">-e JVM_XMS=256m \</span><br><span class="line">-e JVM_XMX=256m \</span><br><span class="line">-e MODE=standalone \</span><br><span class="line">-e PREFER_HOST_MODE=hostname \</span><br><span class="line">-v /mydata/nacos/logs:/home/nacos/logs \</span><br><span class="line">-v /mydata/nacos/init.d/custom.properties:/home/nacos/init.d/custom.properties \</span><br><span class="line">nacos/nacos-server</span><br></pre></td></tr></table></figure>
+
+<p>访问：ip地址:8848&#x2F;nacos  用户密码都是nacos</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>張小升</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://mrzls999.github.io/2024/07/24/Dokcer/">https://mrzls999.github.io/2024/07/24/Dokcer/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span></span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>你会成功吗?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Docker/"># Docker</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2024/07/24/Oracle%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/">Oracle基本操作</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© 張小升 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
