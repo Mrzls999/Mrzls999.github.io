@@ -127,6 +127,71 @@
                 <div class="container">
     
     
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
 
     
     <article class="post-wrap">
@@ -144,12 +209,89 @@
                         </span>
                     
                     
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Git/">Git</a>
+                            
+                        </span>
+                    
                 </div>
             
         </header>
 
         <div class="post-content">
-            
+            <h1 id="Git操作"><a href="#Git操作" class="headerlink" title="Git操作"></a>Git操作</h1><h2 id="将本地项目提交到Gitee"><a href="#将本地项目提交到Gitee" class="headerlink" title="将本地项目提交到Gitee"></a>将本地项目提交到Gitee</h2><p>1、创建一个新的仓库：首先，在Gitee上创建一个新的仓库。</p>
+<p>2、初始化本地项目为Git仓库：这将在项目目录中创建一个名为”.git”的隐藏文件夹，用于存储Git的相关配置和版本信息。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+
+<p>3、将项目文件添加到暂存区：执行以下命令将项目文件添加到Git的暂存区：</p>
+<p>   这将会添加所有文件到暂存区。如果你只想添加特定的文件，可以将”.”替换为文件路径或文件名。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br></pre></td></tr></table></figure>
+
+<p>4、提交文件到本地仓库：执行以下命令将暂存区中的文件提交到本地仓库，并添加提交信息：将”提交信息”替换为你对本次提交的描述，可以是任意文本。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">&quot;提交信息&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>5、关联本地仓库与远程仓库：执行以下命令将本地仓库与你在Gitee上创建的仓库进行关联：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin 仓库地址</span><br></pre></td></tr></table></figure>
+
+<p>6、推送到远程仓库：执行以下命令将本地仓库的内容推送到远程仓库：</p>
+<p>  在执行推送命令时，如果提示需要登录Gitee账号，请输入你的Gitee账号用户名和密码进行身份验证</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+
+<h2 id="从Gitee克隆项目到本地"><a href="#从Gitee克隆项目到本地" class="headerlink" title="从Gitee克隆项目到本地"></a>从Gitee克隆项目到本地</h2><p>待完善</p>
+<h2 id="配置git忽略文件"><a href="#配置git忽略文件" class="headerlink" title="配置git忽略文件"></a>配置git忽略文件</h2><h3 id="创建git忽略文件"><a href="#创建git忽略文件" class="headerlink" title="创建git忽略文件"></a>创建git忽略文件</h3><p>在根目录下创建 .gitignore 文件，在.gitignore 文件下添加如下配置<br>语法规范</p>
+<p>  以<code>/</code>开头忽略当前目录下的文件，但不包括子目录下的文件<br>  以<code>/</code>结尾忽略目录下所有文件及内容，不管是根目录或子目录都会被忽略<br>  以 <code>#</code> 开头表示注释<br>  以 <code>*</code> 匹配零个或多个字符<br>  以 <code>?</code> 匹配单个字符<br>  以 <code>[]</code> 匹配括号内的任一字符<br>  <code>!</code> 表示不忽略(跟踪)匹配到的文件或目录<br>  不添加任何符号表示直接忽略当前目录下的这个文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 前端开发常用的配置如下</span></span><br><span class="line"></span><br><span class="line">.DS_Store</span><br><span class="line">node_modules</span><br><span class="line">/dist</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># local env files</span></span><br><span class="line">.env.local</span><br><span class="line">.<span class="built_in">env</span>.*.<span class="built_in">local</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Log files</span></span><br><span class="line">npm-debug.log*</span><br><span class="line">yarn-debug.log*</span><br><span class="line">yarn-error.log*</span><br><span class="line">pnpm-debug.log*</span><br><span class="line"></span><br><span class="line"><span class="comment"># Editor directories and files</span></span><br><span class="line">.idea</span><br><span class="line">.vscode</span><br><span class="line">*.suo</span><br><span class="line">*.ntvs*</span><br><span class="line">*.njsproj</span><br><span class="line">*.sln</span><br><span class="line">*.sw?</span><br><span class="line"></span><br><span class="line">package-lock.json</span><br><span class="line">yarn.lock</span><br></pre></td></tr></table></figure>
+
+<h3 id="gitignore-规则不生效"><a href="#gitignore-规则不生效" class="headerlink" title=".gitignore 规则不生效"></a>.gitignore 规则不生效</h3><p>.gitignore 只能忽略那些原来没有被追踪（tracked）的文件，如果某些文件已经被纳入了版本管理中，则修改 .gitignore 是无效的。</p>
+<p>解决方法就是先把本地缓存删除（改变成未track状态），然后再提交：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">rm</span> -r --cached .</span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&#x27;update .gitignore&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>你想添加一个文件到Git，但发现添加不了，原因是这个文件被.gitignore忽略了：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git add App.class</span><br><span class="line">The following paths are ignored by one of your .gitignore files:</span><br><span class="line">App.class</span><br><span class="line">Use -f <span class="keyword">if</span> you really want to add them.</span><br></pre></td></tr></table></figure>
+
+<p>如果你确实想添加该文件，可以用 -f 强制添加到Git：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git add -f App.class</span><br></pre></td></tr></table></figure>
+
+<p>或者你发现，可能是.gitignore写得有问题，需要找出来到底哪个规则写错了，可以用git check-ignore命令检查：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git check-ignore -v App.class</span><br><span class="line">.gitignore:3:*.class    App.class</span><br></pre></td></tr></table></figure>
+
+<p>Git会告诉我们，.gitignore的第3行规则忽略了该文件，于是我们就可以知道应该修订哪个规则。</p>
+<h3 id="忽略已提交文件中的变化"><a href="#忽略已提交文件中的变化" class="headerlink" title="忽略已提交文件中的变化"></a>忽略已提交文件中的变化</h3><h4 id="临时忽略变更"><a href="#临时忽略变更" class="headerlink" title="临时忽略变更"></a>临时忽略变更</h4><p>在开发阶段，有时候需要临时忽略本地仓库中已提交的文件的变更（<strong>临时：不被add，不被commit，不被push</strong>）。例如，你的配置文件与本机的工作环境或者项目配置有关，那么这个操作就非常有用：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git update-index --skip-worktree &lt;file&gt;</span><br></pre></td></tr></table></figure>
+
+<p>当然也可以恢复文件的追踪：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git update-index --no-skip-worktree &lt;file&gt;</span><br></pre></td></tr></table></figure>
+
+<p>也可以通过以下方式进行。这主要是为了防止文件被开发者修改。</p>
+<p>关闭变更追踪：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git update-index --assume-unchanged &lt;file&gt;</span><br></pre></td></tr></table></figure>
+
+<p>恢复变更追踪：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git update-index --no-assume-unchanged &lt;file&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="永久忽略文件变更"><a href="#永久忽略文件变更" class="headerlink" title="永久忽略文件变更"></a>永久忽略文件变更</h4><p>如果一个文件已经被 Git 跟踪，那么再将这个文件添加到 .gitignore 中并不会忽略文件变更。你还需要从Git 暂存区（index）中移除这个文件的信息（<strong>即永久不被add，不被commit，不被push</strong>），步骤如下：</p>
+<p>在 .gitignore 中添加这个文件需要先从暂存区移除文件信息：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">rm</span> --cached  &lt;file&gt;</span><br></pre></td></tr></table></figure>
+
+<p>提交删除文件和更新的 .gitignore 到您的仓库</p>
+<h2 id="配置全局用户名邮箱"><a href="#配置全局用户名邮箱" class="headerlink" title="配置全局用户名邮箱"></a>配置全局用户名邮箱</h2><p>git config –global user.name “Mrzls999”<br>git config –global user.email “<a href="mailto:&#109;&#114;&#x7a;&#x78;&#115;&#x39;&#x39;&#57;&#64;&#x31;&#x36;&#51;&#46;&#99;&#111;&#109;">&#109;&#114;&#x7a;&#x78;&#115;&#x39;&#x39;&#57;&#64;&#x31;&#x36;&#51;&#46;&#99;&#111;&#109;</a>“</p>
+<h2 id="特殊语句"><a href="#特殊语句" class="headerlink" title="特殊语句"></a>特殊语句</h2><ul>
+<li><p>添加当前目录下的所有文件，但排除 xxx 文件&#x2F;目录	<code>git add -- &#39;:!xxx&#39;</code> </p>
+</li>
+<li><p>强制add <code>git add -f -- &#39;:!xxx.txt&#39;</code> </p>
+</li>
+<li><p>撤销它们的追踪状态，就是不被add，不被commit，不被push  <code>git rm --cached xxx_file or xxx_folder</code></p>
+</li>
+<li><p>git.io博客备份到gitee时，忽略掉node_modules  <code>git add -f -- &#39;:!node_modules&#39;</code></p>
+</li>
+<li><p>commit：<code>git commit -m &quot;update Blog&quot;</code></p>
+</li>
+<li><p>push，此处注意不一定是master，也可能是别的分支比如main等：<code>git push -u origin master</code></p>
+</li>
+</ul>
+
         </div>
 
         
@@ -186,6 +328,10 @@
                 <span>Tag(s):</span>
                 <span class="tag">
                     
+                    
+                        <a href="/tags/Git/"># Git</a>
+                    
+                        
                 </span>
             </div>
             <div>
